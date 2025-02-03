@@ -14,8 +14,6 @@ services:
         build:
           context: ./database #the path to the folder for the database files
           dockerfile: Dockerfile #path of the database Dockerfile
-        ports:
-        - 5432:5432 #port mapping for postgres 
         env_file: ".env"
         environment: #env variables
         - POSTGRES_DB=${DATABASE_NAME}
