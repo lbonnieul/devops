@@ -15,11 +15,12 @@ services:
           context: ./database #the path to the folder for the database files
           dockerfile: Dockerfile #path of the database Dockerfile
         ports:
-        - 5432:5432 #port mapping for postgres
+        - 5432:5432 #port mapping for postgres 
+        env_file: ".env"
         environment: #env variables
-        - POSTGRES_DB=db
-        - POSTGRES_USER=usr
-        - POSTGRES_PASSWORD=pwd
+        - POSTGRES_DB=${DATABASE_NAME}
+        - POSTGRES_USER=${DATABASE_USR}
+        - POSTGRES_PASSWORD=${DATABASE_PWD}
         networks:
         - network #networks to be connected to (to communicate with other containers)
         volumes:
