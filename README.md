@@ -37,5 +37,62 @@ Also need to add the flag `-v tp1-volume:/var/lib/postgresql/data` to the run co
 ### 1-4 Why do we need a multistage build? And explain each step of this dockerfile.  
 With multi-stage builds, you use multiple FROM statements in your Dockerfile. Each FROM instruction can use a different base, and each of them begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image thus reducing the size of the final image. The build tools are not kept in the final image only the .jar 
 
-### 1-5 1-5 Why do we need a reverse proxy?  
+### 1-5 Why do we need a reverse proxy?  
 A reverse proxy hides the backend server’s IP address, reducing exposure to direct attacks. It also ease centralized routing and access control
+
+### 1-6 Why is docker-compose so important?  
+It simplifies the running of multiple-container apps by using all the Dockerfiles with on simple command
+
+### 1-7 Document docker-compose most important commands. 
+
+To build the images of the differents parts `docker-compose build`  
+To run all the containers `docker-compose up`  
+To stop the containers `docker-compose down`  
+
+### 1-8 Document your docker-compose file.
+
+```
+
+
+services:
+    backend: #the image for the java api
+        build:
+          context: ./backend #the path to the folder for the backend files
+          dockerfile: Dockerfile #path of the backend Dockerfile
+        networks:
+        - network #networks to be connected to (to communicate with other containers)
+        depends_on:
+        - database #because the backend needs the database to be up before uping
+
+    database: #the image for the postgres database
+        build:
+          context: ./database #the path to the folder for the database files
+          dockerfile: Dockerfile #path of the database Dockerfile
+        ports:
+        - 5432:5432 #port mapping for postgres
+        environment: #env variables
+        - POSTGRES_DB=db
+        - POSTGRES_USER=usr
+        - POSTGRES_PASSWORD=pwd
+        networks:
+        - network #networks to be connected to (to communicate with other containers)
+        volumes:
+        - volume:/var/lib/postgresql/data #volume for data persistence
+
+    frontend: #the image for the frontend (reverse proxy apache server)
+        build:
+          context: ./frontend #the path to the folder for the frontend files
+          dockerfile: Dockerfile #path of the frontend Dockerfile
+        ports: 
+        - 80:80 #port mapping for apache
+        networks:
+        - network #networks to be connected to (to communicate with other containers)
+        depends_on:
+        - backend #because the frontend needs the backend to be up before uping
+
+networks:
+    network:
+
+volumes:
+    volume:
+```

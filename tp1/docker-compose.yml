@@ -1,0 +1,43 @@
+
+
+services:
+    backend: #the image for the java api
+        build:
+          context: ./backend #the path to the folder for the backend files
+          dockerfile: Dockerfile #path of the backend Dockerfile
+        networks:
+        - network #networks to be connected to (to communicate with other containers)
+        depends_on:
+        - database #because the backend needs the database to be up before uping
+
+    database: #the image for the postgres database
+        build:
+          context: ./database #the path to the folder for the database files
+          dockerfile: Dockerfile #path of the database Dockerfile
+        ports:
+        - 5432:5432 #port mapping for postgres
+        environment: #env variables
+        - POSTGRES_DB=db
+        - POSTGRES_USER=usr
+        - POSTGRES_PASSWORD=pwd
+        networks:
+        - network #networks to be connected to (to communicate with other containers)
+        volumes:
+        - volume:/var/lib/postgresql/data #volume for data persistence
+
+    frontend: #the image for the frontend (reverse proxy apache server)
+        build:
+          context: ./frontend #the path to the folder for the frontend files
+          dockerfile: Dockerfile #path of the frontend Dockerfile
+        ports: 
+        - 80:80 #port mapping for apache
+        networks:
+        - network #networks to be connected to (to communicate with other containers)
+        depends_on:
+        - backend #because the frontend needs the backend to be up before uping
+
+networks:
+    network:
+
+volumes:
+    volume:
