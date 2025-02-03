@@ -36,3 +36,6 @@ Also need to add the flag `-v tp1-volume:/var/lib/postgresql/data` to the run co
 
 ### 1-4 Why do we need a multistage build? And explain each step of this dockerfile.  
 With multi-stage builds, you use multiple FROM statements in your Dockerfile. Each FROM instruction can use a different base, and each of them begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image thus reducing the size of the final image. The build tools are not kept in the final image only the .jar 
+
+### 1-5 1-5 Why do we need a reverse proxy?  
+A reverse proxy hides the backend server’s IP address, reducing exposure to direct attacks. It also ease centralized routing and access control
