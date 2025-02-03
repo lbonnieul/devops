@@ -1,7 +1,6 @@
 # DevOps
 ## TP 1
 
-
 Questions :  
 ### 1-1 Why should we run the container with a flag -e to give the environment variables?  
 It keeps the variables out of the Dockerfile preventing them to be exposed if the image is shared or pushing them into a git repo (it is hard to get rid of once pushed)
@@ -34,3 +33,6 @@ Creating a volume for postgresql data presistence :
 `docker volume create tp1-volume`
 
 Also need to add the flag `-v tp1-volume:/var/lib/postgresql/data` to the run command for the database-tp1 container
+
+### 1-4 Why do we need a multistage build? And explain each step of this dockerfile.  
+With multi-stage builds, you use multiple FROM statements in your Dockerfile. Each FROM instruction can use a different base, and each of them begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image thus reducing the size of the final image. The build tools are not kept in the final image only the .jar 
