@@ -96,3 +96,18 @@ networks:
 volumes:
     volume:
 ```
+
+### 1-9 Document your publication commands and published images in dockerhub.  
+Création des tag :  
+`docker tag tp1-frontend lbonnieul/frontend:1.0`  
+`docker tag tp1-backend lbonnieul/backend:1.0`  
+`docker tag tp1-database lbonnieul/database:1.0`  
+
+Publication :  
+`docker push lbonnieul/frontend:1.0`  
+`docker push lbonnieul/backend:1.0`  
+`docker push lbonnieul/database:1.0`  
+
+
+### 1-10 Why do we put our images into an online repo?  
+We store Docker images in online repositories for centralized access, version control, and seamless collaboration across teams and environments. This ensures secure, scalable, and automated deployment, facilitating global distribution and streamlined CI/CD workflows.
