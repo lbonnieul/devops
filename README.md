@@ -154,4 +154,6 @@ jobs:
 
 
 ### 2-3 For what purpose do we need to push docker images?  
-The purpose is to keep images to date with the project changes. everytime we push on the main branch it publishes the new images allowing collaborators or image users stay up to date
+The purpose is to keep images to date with the project changes. everytime we push on the main branch it publishes the new images allowing collaborators or image users stay up to date  
+
+### 2-4 Document your quality gate configuration.
