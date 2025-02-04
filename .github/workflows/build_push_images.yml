@@ -21,13 +21,17 @@ jobs:
       - name: Login to DockerHub
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Numero version
+        run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file backend/pom.xml)" >> $GITHUB_ENV
+
       - name: Build image and push backend
         uses: docker/build-push-action@v4
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./backend
           # Note: tags has to be all lower-case
-          tags:  ${{secrets.DOCKERHUB_USERNAME}}/backend:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/backend:latest,
+                ${{secrets.DOCKERHUB_USERNAME}}/backend:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -35,7 +39,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./database
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/database:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/database:latest,
+                ${{secrets.DOCKERHUB_USERNAME}}/database:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -43,6 +48,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/frontend:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/frontend:latest,
+                ${{secrets.DOCKERHUB_USERNAME}}/frontend:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}

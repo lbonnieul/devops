@@ -157,3 +157,5 @@ jobs:
 The purpose is to keep images to date with the project changes. everytime we push on the main branch it publishes the new images allowing collaborators or image users stay up to date  
 
 ### 2-4 Document your quality gate configuration
+
+Trying for a merge request with tests valid again
