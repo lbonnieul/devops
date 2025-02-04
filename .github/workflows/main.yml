@@ -15,8 +15,13 @@ jobs:
       - uses: actions/checkout@v2.5.0
 
      #do the same with another action (actions/setup-java@v3) that enable to setup jdk 21
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
-        - uses: actions/septup-java@v3
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'amazoncorretto'
+          architecture: x64
 
      #finally build your app with the latest command
       - name: Build and test with Maven
