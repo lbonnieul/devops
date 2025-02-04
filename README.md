@@ -11,14 +11,14 @@ By default when a container is stopped and removed, all the data is deleted, att
 
 ### 1-3 Document your database container essentials: commands and Dockerfile.  
 Building my postgres image from the root of the repo : 
-`docker build -t lbonnieul/tp1/database ./tp1/database`
+`docker build -t lbonnieul/database ./database`
 
 Creating a network in order for our containers to communicate : `docker network create tp1-network`  
 
 Running containers for postgres and adminer :  
-`docker run -d --network tp1-network --name database_tp1 -e POSTGRES_DB=db -e POSTGRES_USER=usr -e POSTGRES_PASSWORD=pwd lbonnieul/tp1/database`  
+`docker run -d --network tp1-network --name database -e POSTGRES_DB=db -e POSTGRES_USER=usr -e POSTGRES_PASSWORD=pwd lbonnieul/database`  
 
-(With the ENV command not commented in the tp1/database/Dockerfile use `docker run -d --network tp1-network --name database_tp1 lbonnieul/tp1/database` instead to run the database image.)
+(With the ENV command not commented in the tp1/database/Dockerfile use `docker run -d --network tp1-network --name database lbonnieul/database` instead to run the database image.)
 
 `docker run -d --network tp1-network --name adminer_tp1 -p 8080:8080 adminer`
 
@@ -104,9 +104,9 @@ volumes:
 
 ### 1-9 Document your publication commands and published images in dockerhub.  
 Création des tag :  
-`docker tag tp1-frontend lbonnieul/frontend:1.0`  
-`docker tag tp1-backend lbonnieul/backend:1.0`  
-`docker tag tp1-database lbonnieul/database:1.0`  
+`docker tag devops-frontend lbonnieul/frontend:1.0`  
+`docker tag devops-backend lbonnieul/backend:1.0`  
+`docker tag devops-database lbonnieul/database:1.0`  
 
 Publication :  
 `docker push lbonnieul/frontend:1.0`  

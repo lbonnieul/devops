@@ -1,5 +1,3 @@
-
-
 services:
     backend: #the image for the java api
         build:
