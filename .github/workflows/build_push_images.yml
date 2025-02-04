@@ -9,6 +9,7 @@ on:
       - completed
 jobs:
   build-and-push-docker-image:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
 
