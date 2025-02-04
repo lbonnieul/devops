@@ -1,0 +1,39 @@
+name: Enforce Branch Protection
+
+on:
+  workflow_run:
+    workflows:
+      - test-build-backend
+    branches:
+      - main  # Maintenant aussi pour les PRs vers main
+      - develop
+    types:
+      - requested
+
+jobs:
+  protect-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appliquer les règles de protection sur develop
+        if: github.base_ref == 'develop'  # S'applique uniquement si la PR cible develop
+        uses: octokit/request-action@v2.x
+        with:
+          route: PUT /repos/:repository/branches/develop/protection
+          repository: ${{ github.repository }}
+          required_status_checks: '{"strict": true, "contexts": ["test-backend"]}'
+          enforce_admins: true
+          required_pull_request_reviews: '{"required_approving_review_count": 1}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}  # Utilisation du PAT GitHub
+
+      - name: Appliquer les règles de protection sur main
+        if: github.base_ref == 'main'  # S'applique uniquement si la PR cible main
+        uses: octokit/request-action@v2.x
+        with:
+          route: PUT /repos/:repository/branches/main/protection
+          repository: ${{ github.repository }}
+          required_status_checks: '{"strict": true, "contexts": ["test-backend"]}'
+          enforce_admins: true
+          required_pull_request_reviews: '{"required_approving_review_count": 1}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
