@@ -151,3 +151,7 @@ jobs:
       - name: Build and test with Maven
         run: mvn clean verify --file backend/pom.xml #maven command to build and test the project
 ```
+
+
+### 2-3 For what purpose do we need to push docker images?  
+The purpose is to keep images to date with the project changes. everytime we push on the main branch it publishes the new images allowing collaborators or image users stay up to date
