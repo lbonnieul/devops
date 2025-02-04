@@ -52,15 +52,19 @@ To stop the containers `docker-compose down`
 ### 1-8 Document your docker-compose file.
 
 ```
-
-
 services:
     backend: #the image for the java api
         build:
           context: ./backend #the path to the folder for the backend files
           dockerfile: Dockerfile #path of the backend Dockerfile
-        networks:
-        - network #networks to be connected to (to communicate with other containers)
+        env_file: ".env"
+        environment:
+        - DB_NAME=${DATABASE_NAME}
+        - DB_USER=${DATABASE_USR}
+        - DB_PASSWORD=${DATABASE_PWD}
+        networks: #networks to be connected to (to communicate with other containers)
+        - network-back-db
+        - network-front-back 
         depends_on:
         - database #because the backend needs the database to be up before uping
 
@@ -68,14 +72,13 @@ services:
         build:
           context: ./database #the path to the folder for the database files
           dockerfile: Dockerfile #path of the database Dockerfile
-        ports:
-        - 5432:5432 #port mapping for postgres
+        env_file: ".env"
         environment: #env variables
-        - POSTGRES_DB=db
-        - POSTGRES_USER=usr
-        - POSTGRES_PASSWORD=pwd
+        - POSTGRES_DB=${DATABASE_NAME}
+        - POSTGRES_USER=${DATABASE_USR}
+        - POSTGRES_PASSWORD=${DATABASE_PWD}
         networks:
-        - network #networks to be connected to (to communicate with other containers)
+        - network-back-db #networks to be connected to (to communicate with other containers)
         volumes:
         - volume:/var/lib/postgresql/data #volume for data persistence
 
@@ -86,15 +89,17 @@ services:
         ports: 
         - 80:80 #port mapping for apache
         networks:
-        - network #networks to be connected to (to communicate with other containers)
+        - network-front-back #networks to be connected to (to communicate with other containers)
         depends_on:
         - backend #because the frontend needs the backend to be up before uping
 
 networks:
-    network:
+    network-back-db:
+    network-front-back:
 
 volumes:
     volume:
+
 ```
 
 ### 1-9 Document your publication commands and published images in dockerhub.  
