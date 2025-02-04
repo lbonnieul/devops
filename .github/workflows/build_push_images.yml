@@ -30,8 +30,8 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./backend
           # Note: tags has to be all lower-case
-          tags:  ${{secrets.DOCKERHUB_USERNAME}}/backend:latest,
-          ${{secrets.DOCKERHUB_USERNAME}}/backend:${{env.VERSION}}
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/backend:latest,
+                ${{secrets.DOCKERHUB_USERNAME}}/backend:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -40,7 +40,7 @@ jobs:
         with:
           context: ./database
           tags: ${{secrets.DOCKERHUB_USERNAME}}/database:latest,
-          ${{secrets.DOCKERHUB_USERNAME}}/database:${{env.VERSION}}
+                ${{secrets.DOCKERHUB_USERNAME}}/database:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -49,6 +49,6 @@ jobs:
         with:
           context: ./frontend
           tags: ${{secrets.DOCKERHUB_USERNAME}}/frontend:latest,
-          ${{secrets.DOCKERHUB_USERNAME}}/frontend:${{env.VERSION}}
+                ${{secrets.DOCKERHUB_USERNAME}}/frontend:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
