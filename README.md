@@ -122,3 +122,32 @@ We store Docker images in online repositories for centralized access, version co
 ### 2-1 What are testcontainers?  
 They are java librairies allowing you to build containers during the testing your project
 
+### 2-2 Document your Github Actions configurations. 
+```
+name: CI devops 2025
+on:
+  #to begin you want to launch this job in main and develop
+  push:
+    branches: 
+      - main #triggering the jobs on push on main
+      - develop #triggering the jobs on push on develop
+  pull_request:
+
+jobs:
+  test-backend: 
+    runs-on: ubuntu-22.04
+    steps:
+     #checkout your github code using actions/checkout@v2.5.0
+      - uses: actions/checkout@v2.5.0
+
+     #do the same with another action (actions/setup-java@v3) that enable to setup jdk 21
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto' #using the same distribution as the docker image
+          java-version: '21' #java version of the project
+
+     #finally build your app with the latest command
+      - name: Build and test with Maven
+        run: mvn clean verify --file backend/pom.xml #maven command to build and test the project
+```
