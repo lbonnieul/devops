@@ -1,10 +1,14 @@
 name: Enforce Branch Protection
 
 on:
-  pull_request:
+  workflow_run:
+    workflows:
+      - test-build-backend
     branches:
-      - develop
       - main  # Maintenant aussi pour les PRs vers main
+      - develop
+    types:
+      - requested
 
 jobs:
   protect-branch:
