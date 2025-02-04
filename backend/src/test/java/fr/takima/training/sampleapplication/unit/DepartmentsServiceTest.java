@@ -27,9 +27,15 @@ class DepartmentsServiceTest {
             .name("DepartementTest")
             .build();
 
+    private final Department DEPARTMENTS = Department.builder()
+    .id(2L)
+    .name("DepartementsTest")
+    .build();
+
+
     @Test
     void testGetDepartmentByName() {
-        when(departmentDAO.findDepartmentByName("DepartmentTest")).thenReturn(DEPARTMENT);
+        when(departmentDAO.findDepartmentByName("DepartmentTest")).thenReturn(DEPARTMENTS);
         assertEquals(DEPARTMENT, departmentDAO.findDepartmentByName("DepartmentTest"));
     }
 
