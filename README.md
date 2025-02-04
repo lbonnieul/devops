@@ -116,3 +116,9 @@ Publication :
 
 ### 1-10 Why do we put our images into an online repo?  
 We store Docker images in online repositories for centralized access, version control, and seamless collaboration across teams and environments. This ensures secure, scalable, and automated deployment, facilitating global distribution and streamlined CI/CD workflows.
+
+
+## TP 2  
+### 2-1 What are testcontainers?  
+They are java librairies allowing you to build containers during the testing your project
+

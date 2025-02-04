@@ -2,7 +2,9 @@ name: CI devops 2025
 on:
   #to begin you want to launch this job in main and develop
   push:
-    branches: #TODO 
+    branches: 
+    - main
+    - develop
   pull_request:
 
 jobs:
@@ -14,8 +16,8 @@ jobs:
 
      #do the same with another action (actions/setup-java@v3) that enable to setup jdk 21
       - name: Set up JDK 21
-        #TODO
+        - uses: actions/septup-java@v3
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: #TODO
+        run: maven clean verify --file /backend/pom.xml
