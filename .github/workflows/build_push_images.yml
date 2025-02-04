@@ -1,6 +1,8 @@
 name: build-push-docker-images
 on:
   workflow_run:
+    branches:
+      - main
     workflows:
       - test-build-backend
     types:
