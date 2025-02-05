@@ -1,15 +1,14 @@
 ---
 # tasks file for roles/database
 - name: Create the database container
-  community.docker.docker_container:
+  docker_container:
     name: database
     image: lbonnieul/database
     pull: yes
-    env_file: /home/admin/.env
-    env: 
-      POSTGRES_DB=DB_NAME
-      POSTGRES_USER=DB_USER
-      POSTGRES_PASSWORD=DB_PASSWORD
+    env:
+      POSTGRES_DB: "db"
+      POSTGRES_USER: "usr"
+      POSTGRES_PASSWORD: "pwd"
     volumes:
       - volume-data:/var/lib/postgresql/data
     networks:

@@ -1,9 +1,9 @@
 ---
 # tasks file for roles/database
 - name: Create the database-backend network
-  community.docker.docker_network:
+  docker_network:
     name: network-database-backend
 
-- name: Create the backend-frontend network
-  community.docker.docker_network:
-    name: network-backend-frontend
+- name: Create the backend-proxy network
+  docker_network:
+    name: network-backend-proxy

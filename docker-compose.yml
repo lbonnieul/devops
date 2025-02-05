@@ -14,7 +14,6 @@ services:
         build:
           context: ./database #the path to the folder for the database files
           dockerfile: Dockerfile #path of the database Dockerfile
-        env_file: ".env"
         environment: #env variables
         - POSTGRES_DB=${DB_NAME}
         - POSTGRES_USER=${DB_USER}
@@ -24,16 +23,16 @@ services:
         volumes:
         - volume:/var/lib/postgresql/data #volume for data persistence
 
-    frontend: #the image for the frontend (reverse proxy apache server)
+    proxy: #the image for the proxy (reverse proxy apache server)
         build:
-          context: ./frontend #the path to the folder for the frontend files
-          dockerfile: Dockerfile #path of the frontend Dockerfile
+          context: ./proxy #the path to the folder for the proxy files
+          dockerfile: Dockerfile #path of the proxy Dockerfile
         ports: 
         - 80:80 #port mapping for apache
         networks:
         - network-front-back #networks to be connected to (to communicate with other containers)
         depends_on:
-        - backend #because the frontend needs the backend to be up before uping
+        - backend #because the proxy needs the backend to be up before uping
 
 networks:
     network-back-db:
