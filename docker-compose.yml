@@ -4,10 +4,6 @@ services:
           context: ./backend #the path to the folder for the backend files
           dockerfile: Dockerfile #path of the backend Dockerfile
         env_file: ".env"
-        environment:
-        - DB_NAME=${DATABASE_NAME}
-        - DB_USER=${DATABASE_USR}
-        - DB_PASSWORD=${DATABASE_PWD}
         networks: #networks to be connected to (to communicate with other containers)
         - network-back-db
         - network-front-back 
@@ -20,9 +16,9 @@ services:
           dockerfile: Dockerfile #path of the database Dockerfile
         env_file: ".env"
         environment: #env variables
-        - POSTGRES_DB=${DATABASE_NAME}
-        - POSTGRES_USER=${DATABASE_USR}
-        - POSTGRES_PASSWORD=${DATABASE_PWD}
+        - POSTGRES_DB=${DB_NAME}
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
         networks:
         - network-back-db #networks to be connected to (to communicate with other containers)
         volumes:

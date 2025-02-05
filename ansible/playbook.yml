@@ -3,6 +3,7 @@
   become: true #user becomes root
   roles: 
     - docker #Calls the role docker for him to execute his tasks in roles/docker/tasks/main.yml
+    - env
     - network
     - database
     - backend

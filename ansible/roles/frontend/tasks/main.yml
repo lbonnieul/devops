@@ -4,6 +4,7 @@
   community.docker.docker_container:
     name: frontend
     image: lbonnieul/frontend
+    pull: yes
     networks:
       - name: network-backend-frontend
     ports:

@@ -1,0 +1,6 @@
+---
+# tasks file for roles/env
+- name: Copy .env on the server
+  ansible.builtin.copy:
+    src: /mnt/c/Users/lucas_yagn5n9/devops/.env
+    dest: /home/admin/.env

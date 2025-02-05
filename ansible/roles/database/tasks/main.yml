@@ -4,11 +4,15 @@
   community.docker.docker_container:
     name: database
     image: lbonnieul/database
+    pull: yes
+    env_file: /home/admin/.env
+    env: 
+      POSTGRES_DB=DB_NAME
+      POSTGRES_USER=DB_USER
+      POSTGRES_PASSWORD=DB_PASSWORD
     volumes:
-      - volume-data
+      - volume-data:/var/lib/postgresql/data
     networks:
       - name : network-database-backend
-    env:
-      POSTGRES_DB=${DATABASE_NAME}
-      POSTGRES_USER=${DATABASE_USR}
-      POSTGRES_PASSWORD=${DATABASE_PWD}
+    
+    
