@@ -4,11 +4,14 @@
   community.docker.docker_container:
     name: backend
     image: lbonnieul/backend
+    pull: yes
+    env_file: /home/admin/.env
+    env: 
+      DB_NAME=DB_NAME
+      DB_NAME=DB_USER
+      DB_NAME=DB_PASSWORD
     networks:
       - name: network-database-backend
 
       - name: network-backend-frontend
-    env:
-      DB_NAME=${DATABASE_NAME}
-      DB_USER=${DATABASE_USR}
-      DB_PASSWORD=${DATABASE_PWD}
+    
