@@ -1,0 +1,9 @@
+- hosts: all #defines on which hosts to execcute the playbook
+  gather_facts: true
+  become: true #user becomes root
+  roles: 
+    - docker #Calls the role docker for him to execute his tasks in roles/docker/tasks/main.yml
+    - network
+    - database
+    - backend
+    - frontend

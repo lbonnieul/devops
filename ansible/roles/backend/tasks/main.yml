@@ -1,0 +1,14 @@
+---
+# tasks file for roles/backend
+- name: Create the backend container and connect it to both networks
+  community.docker.docker_container:
+    name: backend
+    image: lbonnieul/backend
+    networks:
+      - name: network-database-backend
+
+      - name: network-backend-frontend
+    env:
+      DB_NAME=${DATABASE_NAME}
+      DB_USER=${DATABASE_USR}
+      DB_PASSWORD=${DATABASE_PWD}
