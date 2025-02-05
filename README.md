@@ -82,16 +82,16 @@ services:
         volumes:
         - volume:/var/lib/postgresql/data #volume for data persistence
 
-    frontend: #the image for the frontend (reverse proxy apache server)
+    proxy: #the image for the proxy (reverse proxy apache server)
         build:
-          context: ./frontend #the path to the folder for the frontend files
-          dockerfile: Dockerfile #path of the frontend Dockerfile
+          context: ./proxy #the path to the folder for the proxy files
+          dockerfile: Dockerfile #path of the proxy Dockerfile
         ports: 
         - 80:80 #port mapping for apache
         networks:
         - network-front-back #networks to be connected to (to communicate with other containers)
         depends_on:
-        - backend #because the frontend needs the backend to be up before uping
+        - backend #because the proxy needs the backend to be up before uping
 
 networks:
     network-back-db:
@@ -104,12 +104,12 @@ volumes:
 
 ### 1-9 Document your publication commands and published images in dockerhub.  
 Création des tag :  
-`docker tag devops-frontend lbonnieul/frontend:1.0`  
+`docker tag devops-proxy lbonnieul/proxy:1.0`  
 `docker tag devops-backend lbonnieul/backend:1.0`  
 `docker tag devops-database lbonnieul/database:1.0`  
 
 Publication :  
-`docker push lbonnieul/frontend:1.0`  
+`docker push lbonnieul/proxy:1.0`  
 `docker push lbonnieul/backend:1.0`  
 `docker push lbonnieul/database:1.0`  
 
