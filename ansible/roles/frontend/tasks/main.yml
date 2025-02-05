@@ -1,0 +1,11 @@
+---
+# tasks file for roles/frontend
+- name: Create the frontend container and connect to network
+  community.docker.docker_container:
+    name: frontend
+    image: lbonnieul/frontend
+    networks:
+      - name: network-backend-frontend
+    ports:
+      - "80:80"
+    
