@@ -1,0 +1,7 @@
+all:
+  vars:
+    ansible_user: admin #host username
+    ansible_ssh_private_key_file: ~/id_rsa #path of the ssh key
+  children:
+    prod: #group prod
+      hosts: lucas.bonnieul1.takima.cloud #hostname 

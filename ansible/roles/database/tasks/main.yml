@@ -1,0 +1,14 @@
+---
+# tasks file for roles/database
+- name: Create the database container
+  community.docker.docker_container:
+    name: database
+    image: lbonnieul/database
+    volumes:
+      - volume-data
+    networks:
+      - name : network-database-backend
+    env:
+      POSTGRES_DB=${DATABASE_NAME}
+      POSTGRES_USER=${DATABASE_USR}
+      POSTGRES_PASSWORD=${DATABASE_PWD}

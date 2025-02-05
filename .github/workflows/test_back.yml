@@ -1,10 +1,6 @@
 name: test-build-backend 
 on:
   #to begin you want to launch this job in main and develop
-  pull_request:
-    branches:
-      - develop
-      - main
   push:
     branches:
       - develop

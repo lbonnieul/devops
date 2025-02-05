@@ -158,4 +158,6 @@ The purpose is to keep images to date with the project changes. everytime we pus
 
 ### 2-4 Document your quality gate configuration
 
-Trying for a merge request with tests valid again
+### 3-1 Document your inventory and base commands  
+
+### 3-2 Document your playbook
