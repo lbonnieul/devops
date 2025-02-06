@@ -52,3 +52,12 @@ jobs:
                 ${{secrets.DOCKERHUB_USERNAME}}/proxy:${{env.VERSION}}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
+      
+      - name: Build image and push frontend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./frontend
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/frontend:latest,
+                ${{secrets.DOCKERHUB_USERNAME}}/frontend:${{env.VERSION}}
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
