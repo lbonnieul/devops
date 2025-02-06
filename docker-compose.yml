@@ -29,10 +29,21 @@ services:
           dockerfile: Dockerfile #path of the proxy Dockerfile
         ports: 
         - 80:80 #port mapping for apache
+        - 8080:8080
         networks:
         - network-front-back #networks to be connected to (to communicate with other containers)
         depends_on:
         - backend #because the proxy needs the backend to be up before uping
+    
+    frontend:
+        build:
+          context: ./frontend
+          dockerfile: Dockerfile
+        network:
+        - network-front-back
+        depends_on:
+        - backend
+
 
 networks:
     network-back-db:
