@@ -3,7 +3,7 @@
 - name: Create the database container
   docker_container:
     name: database
-    image: lbonnieul/database
+    image: lbonnieul/database:latest
     pull: yes
     env:
       POSTGRES_DB: "db"

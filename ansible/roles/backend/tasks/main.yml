@@ -3,7 +3,7 @@
 - name: Create the backend container and connect it to both networks
   docker_container:
     name: backend
-    image: lbonnieul/backend
+    image: lbonnieul/backend:latest
     pull: yes
     env:
       DB_NAME: "db"

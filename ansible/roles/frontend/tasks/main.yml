@@ -1,0 +1,10 @@
+---
+# tasks file for roles/frontend
+- name: Create the frontend container and connect to network
+  docker_container:
+    name: frontend
+    image: lbonnieul/frontend:latest
+    pull: yes
+    networks:
+      - name: network-backend-proxy
+    
